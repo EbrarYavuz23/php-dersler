@@ -1,4 +1,4 @@
-
+<?php $title = "Anasayfa" ?> 
 <?php include 'partials/_header.php'?>
 
     <main> 

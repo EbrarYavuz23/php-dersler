@@ -1,3 +1,6 @@
+
+<?php include 'partials/_variables.php' ?> 
+<?php $title = "Ürünler" ?> 
 <?php include 'partials/_header.php'?>
 
     <main> 

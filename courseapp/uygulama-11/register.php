@@ -14,28 +14,60 @@
 <?php 
 
     if($_SERVER["REQUEST_METHOD"]=="POST") {
-        $username = $_POST["username"];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $repassword = $_POST["repassword"];
-        $city = $_POST["city"];
-        $hobiler = $_POST["hobi"];
 
-    }
-
-        echo $username."<br>";
-        echo $email."<br>"; 
-        echo $password."<br>"; 
-        echo $repassword."<br>"; 
-
-        foreach ($hobiler as $hobi){
-        echo $hobi."<br>";
+        $username = " ";
+        $usernameErr = " ";
+        if (empty($_POST["username"])) {
+            $usernameErr = "username gerekli alan";
+        } else {
+            $username = $_POST["username"];
         }
 
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
+
+        $email = " ";
+        $emailErr = " ";
+        if (empty($_POST["email"])) { 
+            $emailErr = "email gerekli alan";
+        } else {
+            $email = $_POST["email"];
+        }
+
+        $password = " ";
+        $passwordErr = " ";
+        if (empty($_POST["pasword"])) {
+            $passwordErr = "password gerekli alan";
+        } else {
+            $password = $_POST["password"];
+        }
     
+        
+        $repassword = " ";
+        $repasswordErr = " ";
+        if ($_POST["repasword"]!= $_POST["password"]) {
+            $repasswordErr = "parolalar eşleşmiyor";
+        } else {
+            $repassword = $_POST["repassword"];
+        }
+
+        
+        
+        $city = " ";
+        $cityErr = " ";
+        if ($_POST["city"]== -1) {
+            $cityErr = "şehir seçmelisin";
+        } else {
+            $city = $_POST["city"];
+        }
+
+        $hobiler = " ";
+        $hobilerErr = " ";
+        if (!isset($_POST["hobiler"])) {
+            $hobilerErr = "en az 1 hobi seçmelisin";
+        } else {
+            $hobiler = $_POST["hobiler"];
+        }
+    }
+
 ?>
 
 
@@ -48,21 +80,25 @@
                     <div class="mb-3">
                         <label for="username">Kullanıcı Adı</label>
                         <input type="text" name="username" class="form-control">
+                        <div class="text-danger"><?php echo $usernameErr;?></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="email">E-Posta</label>
                         <input type="email" name="email" class="form-control">
+                        <div class="text-danger"><?php echo $emailErr;?></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="password">Şifre</label>
                         <input type="password" name="password" class="form-control">
+                        <div class="text-danger"><?php echo $passwordErr;?></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="repassword">Şifre Tekrar</label>
                         <input type="password" name="repassword" class="form-control">
+                        <div class="text-danger"><?php echo $repasswordErr;?></div>
                     </div>
                     
                     <div class="mb-3">
@@ -78,6 +114,7 @@
                             <option value="7">Çanakkale</option>
                             <option value="8">Muğla</option>
                         </select>
+                        <div class="text-danger"><?php echo $cityErr;?></div>
                     </div>
                     <div class="mb-3">
                         <label for="hobiler">Hobiler</label>
@@ -95,7 +132,7 @@
                             <input type="checkbox" name="hobi[]" value="müzik" id="hobiler_2">
                             <label for="hobiler_2" class="form-check-label">Müzik</label>
                         </div>
-
+                        <div class="text-danger"><?php echo $hobilerErr;?></div>
                     </div>
                     <button type="submit" class="btn btn-primary">Kayıt Ol</button>
                 </form>

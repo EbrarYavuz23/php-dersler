@@ -10,6 +10,17 @@
     );
 
 
+    $sehirler = array(
+        34 => "İstanbul",
+        06 => "Ankara",
+        35 => "İzmir",
+        39 => "Kırklareli",
+        22 => "Edirne",
+        10 => "Balıkesir",
+        17 => "Çanakkale",
+        48 => "Muğla"
+    );
+
 
     $kurslar = array(
         "1" => array(

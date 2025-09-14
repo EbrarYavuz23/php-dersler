@@ -11,12 +11,14 @@
 <?php include "partials/_navbar.php" ?>
 
 
-<?php 
+<?php
+
+    $username =  $email = $password = $repassword = $city = $hobiler = " ";
+    $usernameErr = $emailErr = $passwordErr = $repasswordErr = $cityErr = $hobilerErr = " ";
 
     if($_SERVER["REQUEST_METHOD"]=="POST") {
 
-        $username = " ";
-        $usernameErr = " ";
+        
         if (empty($_POST["username"])) {
             $usernameErr = "username gerekli alan";
         } else {
@@ -24,25 +26,23 @@
         }
 
 
-        $email = " ";
-        $emailErr = " ";
+        
         if (empty($_POST["email"])) { 
             $emailErr = "email gerekli alan";
         } else {
             $email = $_POST["email"];
         }
 
-        $password = " ";
-        $passwordErr = " ";
+
+
         if (empty($_POST["pasword"])) {
             $passwordErr = "password gerekli alan";
         } else {
             $password = $_POST["password"];
         }
     
-        
-        $repassword = " ";
-        $repasswordErr = " ";
+
+         
         if ($_POST["repasword"]!= $_POST["password"]) {
             $repasswordErr = "parolalar eşleşmiyor";
         } else {
@@ -51,16 +51,15 @@
 
         
         
-        $city = " ";
-        $cityErr = " ";
+        
         if ($_POST["city"]== -1) {
             $cityErr = "şehir seçmelisin";
         } else {
             $city = $_POST["city"];
         }
 
-        $hobiler = " ";
-        $hobilerErr = " ";
+        
+        
         if (!isset($_POST["hobiler"])) {
             $hobilerErr = "en az 1 hobi seçmelisin";
         } else {
@@ -79,13 +78,13 @@
                 <form action="register.php" method="post">
                     <div class="mb-3">
                         <label for="username">Kullanıcı Adı</label>
-                        <input type="text" name="username" class="form-control">
+                        <input type="text" name="username" class="form-control" value="<?php echo $username ?>">
                         <div class="text-danger"><?php echo $usernameErr;?></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="email">E-Posta</label>
-                        <input type="email" name="email" class="form-control">
+                        <input type="email" name="email" class="form-control" value="<?php echo $email ?>">
                         <div class="text-danger"><?php echo $emailErr;?></div>
                     </div>
 
@@ -104,15 +103,16 @@
                     <div class="mb-3">
                         <label for="city">Şehir Seçiniz</label>
                         <select name="city" class="form-select">
-                            <option value="-1">Şehir Seçiniz</option>
-                            <option value="1">İstanbul</option>
-                            <option value="2">Ankara</option>
-                            <option value="3">İzmir</option>
-                            <option value="4">Kırklareli</option>
-                            <option value="5">Edirne</option>
-                            <option value="6">Balıkesir</option>
-                            <option value="7">Çanakkale</option>
-                            <option value="8">Muğla</option>
+                        <option value="-1">Şehir Seçiniz</option>  
+                        
+                        
+                        <?php foreach($sehirler as $plaka => $sehir): ?>    
+                            <option value="<?php echo $plaka;?>"
+                            <?php echo $city == $plaka ? "selected": "" ?> >
+                            <?php echo $sehir; ?></option>
+                        <?php endforeach; ?>  
+                        
+                    
                         </select>
                         <div class="text-danger"><?php echo $cityErr;?></div>
                     </div>
